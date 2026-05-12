@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Root Tag -->
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Button?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="hr.algebra.controller.MainController"
+            prefHeight="650.0" prefWidth="1200.0">
+
+    <!-- "Children" go inside said root tag -->
+
+    <Button text="Prikaži satove" layoutX="50.0" layoutY="50.0"/>
+    <TableView fx:id="smartWatchTable" layoutX="50.0" layoutY="100.0">
+
+    </TableView>
+</AnchorPane>
+<!-- Root Tag ending -->
