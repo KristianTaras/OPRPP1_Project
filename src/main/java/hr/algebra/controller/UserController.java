@@ -1,8 +1,4 @@
 package hr.algebra.controller;
 
-public class MainController {
-
-
-
-
+public class UserController {
 }
