@@ -1,10 +1,17 @@
 package hr.algebra.model.entities;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "BaseEntity")
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class BaseEntity {
 
-    //Diamond ID, so every class can implement its own id generator
-    //@Ignore //It will ignore this property when looking for properties to send to database
+    protected BaseEntity() {} //protected better than public/private for only jakarta access
+
+    @XmlElement(name = "Id")
     private int id;
 
     protected BaseEntity(int id){

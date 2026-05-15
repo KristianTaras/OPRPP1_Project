@@ -1,5 +1,6 @@
 package hr.algebra.model.entities;
 
+
 public class IpRating extends BaseEntity {
 
     private String value;

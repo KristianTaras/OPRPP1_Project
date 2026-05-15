@@ -1,29 +1,51 @@
 package hr.algebra.model.entities;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.time.Year;
 import java.util.List;
 import java.util.Set;
 
-
+@XmlRootElement(name = "SmartWatch")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SmartWatch extends BaseEntity {
+
+    //Dummy constructor - need empty constructor to enable jakarta
+    public SmartWatch(){
+        super(0);
+    }
 
     public SmartWatch(int id, String brand, String model, double price) {
         super(id);
     }
     //Extend the constructor so it takes all the properties
+
+    @XmlElement(name = "Name")
     private String name;
-    private Year yearOfMaking;
+    @XmlElement(name = "YearOfMaking")
+    private int yearOfMaking;
+    @XmlElement(name = "ScreenSize")
     private Double screenSize;
+    @XmlElement(name = "BatteryLife")
     private int batteryLife;
+    @XmlElement(name = "IpRating")
     private IpRating ipRating; //Screen protection
+    @XmlElement(name = "CompatibleOperatingSystems")
     private List<CompatibleOSTypes> osTypes;
-
+    @XmlElement(name = "Price")
     private double price;
+    @XmlElement(name = "ImagePath")
     private String imagePath; //imageUrl
-
+    @XmlElement(name = "Brand")
     private Brand brand;
+    @XmlElement(name = "HealthFunction")
     private Set<HealthFunction> healthFunctions;
+    @XmlElement(name = "Category")
     private Category category;
+    @XmlElement(name = "OperatingSystem")
     private OperatingSystem operatingSystem;
 
     //get
@@ -32,8 +54,8 @@ public class SmartWatch extends BaseEntity {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public Year getYearOfMaking() { return yearOfMaking; }
-    public void setYearOfMaking(Year yearOfMaking) { this.yearOfMaking = yearOfMaking; }
+    public int getYearOfMaking() { return yearOfMaking; }
+    public void setYearOfMaking(int yearOfMaking) { this.yearOfMaking = yearOfMaking; }
 
     public Double getScreenSize() { return screenSize; }
     public void setScreenSize(Double screenSize) { this.screenSize = screenSize; }
