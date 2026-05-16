@@ -1,40 +1,49 @@
+CREATE TABLE [User](
+    id INT PRIMARY KEY IDENTITY,
+    username NVARCHAR(50) NOT NULL UNIQUE,
+    email NVARCHAR(100) NOT NULL,
+    phone_number NVARCHAR(20) NULL,
+    password_hash VARCHAR(60) NOT NULL,
+    [Role] VARCHAR(20) NOT NULL,
 
+    CONSTRAINT CHK_User_Role CHECK([Role] IN ('USER','ADMIN'))
+);
 
 CREATE TABLE Brand(
     id INT PRIMARY KEY IDENTITY ,
-    name VARCHAR(255) NOT NULL,
-    country VARCHAR(255) NOT NULL,
-    description VARCHAR(512) NOT NULL
+    name NVARCHAR(255) NOT NULL,
+    country NVARCHAR(255) NOT NULL,
+    description NVARCHAR(512) NOT NULL
 );
 
 CREATE TABLE Category(
     id INT PRIMARY KEY IDENTITY,
-    name VARCHAR(255) NOT NULL
+    name NVARCHAR(255) NOT NULL
 );
 
 CREATE TABLE HealthFunction(
     id INT PRIMARY KEY IDENTITY,
-    name VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL
+    name NVARCHAR(255) NOT NULL,
+    description NVARCHAR(255) NOT NULL
 );
 
 CREATE TABLE OperatingSystem(
     id INT PRIMARY KEY IDENTITY,
-    name VARCHAR(255) NOT NULL,
-    version VARCHAR(255) NOT NULL,
-    developer VARCHAR(255) NOT NULL
+    name NVARCHAR(255) NOT NULL,
+    version NVARCHAR(255) NOT NULL,
+    developer NVARCHAR(255) NOT NULL
 );
 
 
 CREATE TABLE SmartWatch(
     id INT PRIMARY KEY IDENTITY,
-    name VARCHAR(255) NOT NULL,
+    name NVARCHAR(255) NOT NULL,
     year_of_making INT,
     screen_size DOUBLE PRECISION,
     battery_life int,
-    ip_rating VARCHAR(50),
+    ip_rating NVARCHAR(50),
     price Decimal(10, 2),
-    image_path VARCHAR(512),
+    image_path NVARCHAR(512),
 
 
     brand_id INT,

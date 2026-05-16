@@ -1,13 +1,12 @@
-package hr.algebra.model.repositories.interfaces;
+package hr.algebra.model.repositories;
 
 import hr.algebra.model.entities.BaseEntity;
 
-import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public interface RepositoryInterface<T extends BaseEntity> {
+public interface Repository<T extends BaseEntity> {
 
     List<T> getAll();
 

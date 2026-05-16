@@ -1,12 +1,12 @@
 package hr.algebra.model.repositories.entities;
 
 import hr.algebra.database.Database;
-import hr.algebra.model.repositories.interfaces.UnitOfWorkInterface;
+import hr.algebra.model.repositories.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class UnitOfWork implements UnitOfWorkInterface, AutoCloseable {
+public class UnitOfWorkImpl implements UnitOfWork, AutoCloseable {
 
     private final Connection connection;
 
@@ -15,18 +15,19 @@ public class UnitOfWork implements UnitOfWorkInterface, AutoCloseable {
     private CategoryRepository categoryRepository;
     private OperatingSystemRepository operatingSystemRepository;
     private HealthFunctionRepository healthFunctionRepository;
+    private UserRepository userRepository;
 
 
-    public UnitOfWork() throws SQLException{
+    public UnitOfWorkImpl() throws SQLException{
         connection = Database.getConnection();
         connection.setAutoCommit(false); //Turn off to enable rollback
     }
 
     //Lazy loading
     @Override
-    public SmartWatchRepository getSmartWatchRepository() { //Make private
+    public SmartWatchRepository getSmartWatchRepository() {
         if(smartWatchRepository == null){
-            smartWatchRepository = new SmartWatchRepository(connection);
+            smartWatchRepository = new SmartWatchRepositoryImpl(connection);
         }
         return smartWatchRepository;
     }
@@ -34,7 +35,7 @@ public class UnitOfWork implements UnitOfWorkInterface, AutoCloseable {
     @Override
     public BrandRepository getBrandRepository() {
         if(brandRepository == null){
-            brandRepository = new BrandRepository(connection);
+            brandRepository = new BrandRepositoryImpl(connection);
         }
         return brandRepository;
     }
@@ -42,7 +43,7 @@ public class UnitOfWork implements UnitOfWorkInterface, AutoCloseable {
     @Override
     public CategoryRepository getCategoryRepository() {
         if(categoryRepository == null){
-            categoryRepository = new CategoryRepository(connection);
+            categoryRepository = new CategoryRepositoryImpl(connection);
         }
         return categoryRepository;
     }
@@ -50,7 +51,7 @@ public class UnitOfWork implements UnitOfWorkInterface, AutoCloseable {
     @Override
     public OperatingSystemRepository getOperatingSystemRepository() {
         if(operatingSystemRepository == null) {
-            operatingSystemRepository = new OperatingSystemRepository(connection);
+            operatingSystemRepository = new OperatingSystemRepositoryImpl(connection);
         }
         return operatingSystemRepository;
     }
@@ -58,10 +59,19 @@ public class UnitOfWork implements UnitOfWorkInterface, AutoCloseable {
     @Override
     public HealthFunctionRepository getHealthFunctionRepository() {
         if(healthFunctionRepository == null) {
-            healthFunctionRepository = new HealthFunctionRepository(connection);
+            healthFunctionRepository = new HealthFunctionRepositoryImpl(connection);
         }
         return healthFunctionRepository;
     }
+
+    @Override
+    public UserRepository getUserRepository() {
+        if(userRepository == null){
+            userRepository = new UserRepositoryImpl(connection);
+        }
+        return userRepository;
+    }
+
 
     @Override
     public void commit() throws SQLException{

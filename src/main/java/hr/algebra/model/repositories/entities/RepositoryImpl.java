@@ -1,29 +1,25 @@
 package hr.algebra.model.repositories.entities;
 
-import hr.algebra.database.Database;
 import hr.algebra.model.entities.BaseEntity;
 import hr.algebra.model.interfaces.RowMapper;
-import hr.algebra.model.repositories.interfaces.RepositoryInterface;
+import hr.algebra.model.repositories.Repository;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringJoiner;
 
-public class Repository<T extends BaseEntity> implements RepositoryInterface<T> {
+public class RepositoryImpl<T extends BaseEntity> implements Repository<T> {
 
     private final String table;
     private final RowMapper<T> mapper;
     private final Connection connection;
 
-    public Repository(String table,
-                      RowMapper<T> mapper,
-                      Connection connection) {
+    public RepositoryImpl(String table,
+                          RowMapper<T> mapper,
+                          Connection connection) {
 
         this.table = table;
         this.mapper = mapper;
@@ -115,9 +111,9 @@ public class Repository<T extends BaseEntity> implements RepositoryInterface<T> 
                                     tableName, columns, placeholders);
 
         try (PreparedStatement pStmt = connection.prepareStatement(sql,
-                PreparedStatement.RETURN_GENERATED_KEYS)){
+                Statement.RETURN_GENERATED_KEYS)){
             for(int i = 0; i < fields.length; i++){
-                pStmt.setObject(i+1, fields[i].get(entity));
+                pStmt.setObject(i+1, fields[i].get(entity)); //setObject should automatically CAST into the needed SQL data type
             }
 
             pStmt.executeUpdate();

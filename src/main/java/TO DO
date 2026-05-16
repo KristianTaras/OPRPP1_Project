@@ -1,0 +1,10 @@
+Procedure:
+ - Add Brand to SmartWatch
+ - Add OperatingSystem to SmartWatch
+ - Add Category to SmartWatch
+ - Add HealthFunction to SmartWatch
+
+ - Repository is DAO in Java, rename every Repo
+
+
+

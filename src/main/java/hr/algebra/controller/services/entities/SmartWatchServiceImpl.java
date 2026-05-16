@@ -2,17 +2,18 @@ package hr.algebra.controller.services.entities;
 
 
 import hr.algebra.model.entities.SmartWatch;
-import hr.algebra.model.repositories.entities.UnitOfWork;
+import hr.algebra.model.repositories.UnitOfWork;
+import hr.algebra.model.repositories.entities.UnitOfWorkImpl;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class SmartWatchService  {
+public class SmartWatchServiceImpl {
 
     private final UnitOfWork unitOfWork; //public
 
     //tryWithResources u controller-u za unitOfWork, pa saljemo UOW u service kroz constructor
-    public SmartWatchService(UnitOfWork unitOfWork) {
+    public SmartWatchServiceImpl(UnitOfWorkImpl unitOfWork) {
         this.unitOfWork = unitOfWork;
     }
 

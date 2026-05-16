@@ -2,12 +2,13 @@ package hr.algebra.model.repositories.entities;
 
 import hr.algebra.model.entities.Brand;
 import hr.algebra.model.mapper.BrandMapper;
+import hr.algebra.model.repositories.BrandRepository;
 
 import java.sql.Connection;
 
-public class BrandRepository extends Repository<Brand> {
+public class BrandRepositoryImpl extends RepositoryImpl<Brand> implements BrandRepository {
 
-    public BrandRepository(Connection connection) {
+    public BrandRepositoryImpl(Connection connection) {
         super("brand", new BrandMapper(), connection);
     }
 }

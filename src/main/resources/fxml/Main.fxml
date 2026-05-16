@@ -9,7 +9,7 @@
 
 <!-- Root Tag ending -->
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" styleClass="main-background" stylesheets="@../CSS/MainStyle.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.algebra.controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" styleClass="main-background" stylesheets="@../css/MainStyle.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.algebra.controller.MainController">
       <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="1300.0" styleClass="navbar">
             <Button mnemonicParsing="false" styleClass="nav-button" text="Home" />
             <Button mnemonicParsing="false" styleClass="nav-button" text="Smart Watches">

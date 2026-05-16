@@ -31,7 +31,7 @@ public class App extends Application {
         Scene scene = new Scene(decorator, 1300, 800);
 
 
-        String css = getClass().getResource("/CSS/MainStyle.css").toExternalForm();
+        String css = getClass().getResource("/css/MainStyle.css").toExternalForm();
         scene.getStylesheets().add(css);
 
         stage.setScene(scene);

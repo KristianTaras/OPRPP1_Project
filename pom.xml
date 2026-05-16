@@ -64,6 +64,13 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>13.2.1.jre11</version>
         </dependency>
+
+        <!-- Password Salting and Hashing-->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
     </dependencies>
 
 </project>
