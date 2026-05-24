@@ -84,7 +84,7 @@ public class SmartWatchSeeder {
             for (String osTypeName : dto.osTypes) {
                 OperatingSystem compatibleOs = new OperatingSystem(0, osTypeName, "", "");
                 uow.getOperatingSystemRepository().save(compatibleOs);
-                uow.getSmartWatchRepository().linkCompatibleOs(watch.getId(), compatibleOs.getId());
+                uow.getSmartWatchRepository().linkOperatingSystem(watch.getId(), compatibleOs.getId());
             }
         }
     }

@@ -1,5 +1,6 @@
 package hr.algebra.model.repositories;
 
+import hr.algebra.model.entities.SmartWatchOperatingSystem;
 import hr.algebra.model.repositories.entities.*;
 
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ public interface UnitOfWork {
     OperatingSystemRepository getOperatingSystemRepository();
     HealthFunctionRepository getHealthFunctionRepository();
     SmartWatchHealthFunctionRepository getSmartWatchHealthFunctionRepository();
+    SmartWatchOperatingSystemRepository getSmartWatchOperatingSystemRepository();
     UserRepository getUserRepository() throws SQLException;
 
     void commit() throws SQLException;

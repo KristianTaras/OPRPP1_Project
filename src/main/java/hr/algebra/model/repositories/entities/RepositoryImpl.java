@@ -3,6 +3,7 @@ package hr.algebra.model.repositories.entities;
 import hr.algebra.model.entities.BaseEntity;
 import hr.algebra.model.interfaces.Column;
 import hr.algebra.model.interfaces.RowMapper;
+import hr.algebra.model.interfaces.Transient;
 import hr.algebra.model.repositories.Repository;
 import hr.algebra.view.util.DatabaseUtil;
 import java.lang.reflect.Field;
@@ -105,6 +106,9 @@ public class RepositoryImpl<T extends BaseEntity> implements Repository<T> {
             if(field.getName().equalsIgnoreCase("id")){
                 continue;
             }
+            if(field.isAnnotationPresent(Transient.class)){
+                continue;
+            }
             fieldsToInsert.add(field);
             columns.add(getColumnName(field));
             placeholders.add("?");
@@ -129,6 +133,9 @@ public class RepositoryImpl<T extends BaseEntity> implements Repository<T> {
                     ps.setObject(i + 1, value);
                 }
             }
+
+            System.out.println("SQL: " + sql);
+            System.out.println("Class: " + clazz.getSimpleName());
 
             ps.executeUpdate();
 

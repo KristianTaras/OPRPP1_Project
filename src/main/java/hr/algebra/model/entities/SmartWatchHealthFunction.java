@@ -1,22 +1,18 @@
 package hr.algebra.model.entities;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
+
+import hr.algebra.model.interfaces.Column;
 
 import java.util.Objects;
 
-@XmlRootElement(name = "SmartWatchHealthFunctions")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class SmartWatchHealthFunction extends BaseEntity {
 
     public SmartWatchHealthFunction() { super(0); }
     public SmartWatchHealthFunction(int id) { super(id); }
 
-    @XmlElement(name = "SmartWatchId")
+    @Column(name = "smart_watch_id")
     private int smartWatchId;
-    @XmlElement(name = "HealthFunctionId")
+    @Column(name = "health_function_id")
     private int healthFunctionId;
 
     public SmartWatchHealthFunction(int id, int smartWatchId, int healthFunctionId) {

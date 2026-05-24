@@ -1,23 +1,25 @@
 package hr.algebra.model.entities;
 
-
 import hr.algebra.model.interfaces.Column;
 import hr.algebra.model.interfaces.Transient;
-
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class SmartWatch extends BaseEntity {
 
     private final String name;
+    @Column(name = "year_of_making")
     private final int yearOfMaking;
+    @Column(name = "screen_size")
     private final Double screenSize;
+    @Column(name = "battery_life")
     private final int batteryLife;
+    @Column(name = "ip_rating")
     private final String ipRating; //Screen protection
     @Transient
     private Set<OperatingSystem> osTypes = new HashSet<>();
     private final double price;
+    @Column(name = "image_path")
     private final String imagePath; //imageUrl
     @Column(name = "brand_id")
     private int brandId;

@@ -155,8 +155,8 @@ public class SmartWatchRepositoryImpl extends RepositoryImpl<SmartWatch> impleme
     }
 
     @Override
-    public void linkCompatibleOs(int smartwatchId, int operatingSystemId) throws SQLException {
-        String sql = "INSERT INTO CompatibleOsTypes (smart_watch_id, operating_system_id) VALUES (?, ?)";
+    public void linkOperatingSystem(int smartwatchId, int operatingSystemId) throws SQLException {
+        String sql = "INSERT INTO SmartWatchOperatingSystem (smart_watch_id, operating_system_id) VALUES (?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, smartwatchId);
             ps.setInt(2, operatingSystemId);

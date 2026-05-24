@@ -1,7 +1,6 @@
 package hr.algebra.model.entities;
 
 import hr.algebra.model.interfaces.Transient;
-
 import java.util.Set;
 
 public class HealthFunction extends BaseEntity {
@@ -35,4 +34,14 @@ public class HealthFunction extends BaseEntity {
         return smartWatchHealthFunctions;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof HealthFunction that && super.equals(that);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

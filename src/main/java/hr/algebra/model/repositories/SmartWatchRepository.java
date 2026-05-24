@@ -12,5 +12,5 @@ public interface SmartWatchRepository extends Repository<SmartWatch> {
     List<SmartWatch> getFullAll() throws Exception;
 
     void linkHealthFunction(int smartwatchId, int healthFunctionId) throws SQLException;
-    void linkCompatibleOs(int smartwatchId, int operatingSystemId) throws SQLException;
+    void linkOperatingSystem(int smartwatchId, int operatingSystemId) throws SQLException;
 }

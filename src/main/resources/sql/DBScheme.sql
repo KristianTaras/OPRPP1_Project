@@ -70,8 +70,8 @@ CREATE TABLE SmartWatchHealthFunction(
     CONSTRAINT fk_health_function FOREIGN KEY (health_function_id) REFERENCES HealthFunction(id)
 );
 
-IF OBJECT_ID(N'CompatibleOsTypes', N'U') IS NULL
-CREATE TABLE CompatibleOsTypes(
+IF OBJECT_ID(N'SmartWatchOperatingSystem', N'U') IS NULL
+CREATE TABLE SmartWatchOperatingSystem(
     id INT PRIMARY KEY IDENTITY,
     smart_watch_id INT,
     operating_system_id INT,

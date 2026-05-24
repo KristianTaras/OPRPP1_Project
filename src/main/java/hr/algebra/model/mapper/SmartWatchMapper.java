@@ -19,12 +19,12 @@ public class SmartWatchMapper implements RowMapper<SmartWatch> {
         return new SmartWatch(
                 rs.getInt("id"),
                 rs.getString("name"),
-                rs.getInt("year"),
-                rs.getDouble("screenSize"),
-                rs.getInt("batteryLife"),
-                rs.getString("ipRating"),
+                rs.getInt("year_of_making"),
+                rs.getDouble("screen_size"),
+                rs.getInt("battery_life"),
+                rs.getString("ip_rating"),
                 rs.getDouble("price"),
-                rs.getString("imagePath"),
+                rs.getString("image_path"),
                 brandMapper.map(rs),
                 categoryMapper.map(rs),
                 operatingSystemMapper.map(rs)

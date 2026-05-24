@@ -7,7 +7,7 @@ import java.util.List;
 
 public class JsonLoader {
 
-    private static final String JSON_BIN_URL = "https://api.jsonbin.io/v3/qs/6a1302876877513b27c5803e"; //Insert JsonBin.io url
+    private static final String JSON_BIN_URL = "https://api.jsonbin.io/v3/qs/6a1320fbee5a733b1211786b"; //Insert JsonBin.io url
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static List<SmartWatchDTO> loadSmartWatches() throws Exception{

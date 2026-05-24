@@ -1,5 +1,7 @@
 package hr.algebra.model.entities;
 
+import hr.algebra.model.interfaces.Transient;
+
 import java.util.Set;
 
 public class OperatingSystem extends BaseEntity
@@ -7,7 +9,9 @@ public class OperatingSystem extends BaseEntity
     private String name;
     private String version;
     private String developer;
-    private Set<CompatibleOSTypes> compatibleOSTypes;
+
+    @Transient
+    private Set<SmartWatchOperatingSystem> smartWatchOperatingSystems;
 
     public OperatingSystem(int id, String name, String version, String developer){
         super(id);
@@ -26,8 +30,18 @@ public class OperatingSystem extends BaseEntity
     public void setDeveloper(String developer) { this.developer = developer; }
 
 
-    public Set<CompatibleOSTypes> getCompatibleOSTypes() {
-        return compatibleOSTypes;
+    public Set<SmartWatchOperatingSystem> getSmartWatchOperatingSystems() {
+        return smartWatchOperatingSystems;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof OperatingSystem that && super.equals(that);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
 }

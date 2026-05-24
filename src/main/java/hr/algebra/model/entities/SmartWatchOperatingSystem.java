@@ -1,22 +1,17 @@
 package hr.algebra.model.entities;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import hr.algebra.model.interfaces.Column;
 
 import java.util.Objects;
 
-@XmlRootElement(name = "CompatibleOsTypes")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class CompatibleOSTypes extends BaseEntity {
+public class SmartWatchOperatingSystem extends BaseEntity {
 
-    @XmlElement(name = "SmartWatchId")
+    @Column(name = "smart_watch_id")
     private int smartWatchId;
-    @XmlElement(name = "OperatingSystemId")
+    @Column(name = "operating_system_id")
     private int operatingSystemId;
 
-    public CompatibleOSTypes(int id, int smartWatchId, int operatingSystemId){
+    public SmartWatchOperatingSystem(int id, int smartWatchId, int operatingSystemId){
         super(id);
         this.smartWatchId = smartWatchId;
         this.operatingSystemId = operatingSystemId;
@@ -38,7 +33,7 @@ public class CompatibleOSTypes extends BaseEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof CompatibleOSTypes that)) return false;
+        if (!(o instanceof SmartWatchOperatingSystem that)) return false;
         if (!super.equals(o)) return false;
         return smartWatchId == that.smartWatchId && operatingSystemId == that.operatingSystemId;
     }

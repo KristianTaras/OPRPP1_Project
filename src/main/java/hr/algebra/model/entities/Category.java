@@ -1,5 +1,7 @@
 package hr.algebra.model.entities;
 
+import hr.algebra.model.interfaces.Transient;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -7,6 +9,7 @@ import java.util.Set;
 public class Category extends BaseEntity{
 
     private String name;
+    @Transient
     private Set<SmartWatch> watches;
 
     public Category(int id, String name){

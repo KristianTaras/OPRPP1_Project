@@ -1,7 +1,6 @@
 package hr.algebra.model.repositories.entities;
 
-import hr.algebra.model.entities.OperatingSystem;
-import hr.algebra.model.interfaces.RowMapper;
+import hr.algebra.model.entities.SmartWatchOperatingSystem;
 import hr.algebra.model.mapper.*;
 import hr.algebra.model.repositories.*;
 import hr.algebra.view.util.DatabaseUtil;
@@ -18,6 +17,7 @@ public class UnitOfWorkImpl implements UnitOfWork, AutoCloseable {
     private OperatingSystemRepository operatingSystemRepository;
     private HealthFunctionRepository healthFunctionRepository;
     private SmartWatchHealthFunctionRepository smartWatchHealthFunctionRepository;
+    private SmartWatchOperatingSystemRepository smartWatchOperatingSystemRepository;
     private UserRepository userRepository;
 
 
@@ -78,6 +78,15 @@ public class UnitOfWorkImpl implements UnitOfWork, AutoCloseable {
         }
         return smartWatchHealthFunctionRepository;
     }
+
+    @Override
+    public SmartWatchOperatingSystemRepository getSmartWatchOperatingSystemRepository() {
+        if(smartWatchOperatingSystemRepository == null){
+            smartWatchOperatingSystemRepository = new SmartWatchOperatingSystemRepositoryImpl(this.connection, "SmartWatchOperatingSystem", new SmartWatchOperatingSystemMapper());
+        }
+        return smartWatchOperatingSystemRepository;
+    }
+
 
     @Override
     public UserRepository getUserRepository() throws SQLException {

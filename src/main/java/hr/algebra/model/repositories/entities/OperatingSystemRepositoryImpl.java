@@ -27,8 +27,8 @@ public class OperatingSystemRepositoryImpl extends RepositoryImpl<OperatingSyste
         String sql = """
             SELECT os.id, os.name, os.version, os.developer
             FROM OperatingSystem os
-            INNER JOIN CompatibleOsTypes cot ON os.id = cot.operating_system_id
-            WHERE cot.smart_watch_id = ?
+            INNER JOIN SmartWatchOperatingSystem swos ON os.id = swos.operating_system_id
+            WHERE swos.smart_watch_id = ?
             """;
 
         Set<OperatingSystem> operatingSystems = new HashSet<>();
