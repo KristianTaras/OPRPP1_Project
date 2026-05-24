@@ -11,7 +11,8 @@ public interface UnitOfWork {
     CategoryRepository getCategoryRepository();
     OperatingSystemRepository getOperatingSystemRepository();
     HealthFunctionRepository getHealthFunctionRepository();
-    UserRepository getUserRepository();
+    SmartWatchHealthFunctionRepository getSmartWatchHealthFunctionRepository();
+    UserRepository getUserRepository() throws SQLException;
 
     void commit() throws SQLException;
 

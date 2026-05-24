@@ -1,9 +1,8 @@
 package hr.algebra.controller.services;
 
-import hr.algebra.security.entity.Role;
-import hr.algebra.security.entity.User;
+import hr.algebra.model.entities.User;
 
 public interface AuthService {
-    void register(String username, String email,String phoneNumber, String plainPassword) throws Exception;
+    void register(String firstName, String lastName, String email, String phoneNumber, String username, String plainPassword) throws Exception;
     User login(String username, String plainPassword) throws Exception;
 }

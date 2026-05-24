@@ -1,26 +1,20 @@
 package hr.algebra.model.entities;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import java.util.Set;
 
-@XmlRootElement(name = "OperatingSystem")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class OperatingSystem extends BaseEntity
 {
-    public OperatingSystem() { super(0); }
-
-    public OperatingSystem(int id){
-        super(id);
-    }
-
-    @XmlElement(name = "Name")
     private String name;
-    @XmlElement(name = "Version")
     private String version;
-    @XmlElement(name = "Developer")
     private String developer;
+    private Set<CompatibleOSTypes> compatibleOSTypes;
+
+    public OperatingSystem(int id, String name, String version, String developer){
+        super(id);
+        this.name = name;
+        this.version = version;
+        this.developer = developer;
+    }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -30,4 +24,10 @@ public class OperatingSystem extends BaseEntity
 
     public String getDeveloper() { return developer; }
     public void setDeveloper(String developer) { this.developer = developer; }
+
+
+    public Set<CompatibleOSTypes> getCompatibleOSTypes() {
+        return compatibleOSTypes;
+    }
+
 }

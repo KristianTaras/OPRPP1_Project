@@ -11,8 +11,10 @@ public class OperatingSystemMapper implements RowMapper<OperatingSystem> {
     @Override
     public OperatingSystem map(ResultSet rs) throws SQLException {
         return new OperatingSystem(
-                rs.getInt("id")
-                //Add more parameters
+                rs.getInt("id"),
+                rs.getString("name"),
+                rs.getString("version"),
+                rs.getString("developer")
         );
     }
 }

@@ -1,26 +1,23 @@
 package hr.algebra.model.entities;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import hr.algebra.model.interfaces.Transient;
+import java.util.Objects;
+import java.util.Set;
 
-@XmlRootElement(name = "Brand")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Brand extends BaseEntity {
 
-    public Brand() { super(0); }
-
-    public Brand(int id){
-        super(id);
-    }
-
-    @XmlElement(name = "Name")
     private String name; //Apple, Samsung
-    @XmlElement(name = "Country")
     private String country;
-    @XmlElement(name = "Description")
     private String description;
+    @Transient
+    private Set<SmartWatch> smartWatches;
+
+    public Brand(int id, String name, String country, String description ){
+        super(id);
+        this.name = name;
+        this.country = country;
+        this.description = description;
+    }
 
     public String getName() {
         return name;
@@ -41,5 +38,22 @@ public class Brand extends BaseEntity {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public Set<SmartWatch> getSmartWatches() {
+        return smartWatches;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Brand)) return false;
+        return getId() == ((Brand) o).getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

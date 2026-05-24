@@ -1,9 +1,10 @@
 package hr.algebra.model.repositories.entities;
 
 import hr.algebra.model.entities.BaseEntity;
+import hr.algebra.model.interfaces.Column;
 import hr.algebra.model.interfaces.RowMapper;
 import hr.algebra.model.repositories.Repository;
-
+import hr.algebra.view.util.DatabaseUtil;
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.LinkedList;
@@ -17,32 +18,29 @@ public class RepositoryImpl<T extends BaseEntity> implements Repository<T> {
     private final RowMapper<T> mapper;
     private final Connection connection;
 
-    public RepositoryImpl(String table,
-                          RowMapper<T> mapper,
-                          Connection connection) {
-
+    public RepositoryImpl(Connection connection, String table,
+                          RowMapper<T> mapper){
         this.table = table;
         this.mapper = mapper;
         this.connection = connection;
+
     }
 
     //GET ALL
     public List<T> getAll(){
 
         List<T> entities = new LinkedList<>();
-        String sql = "SELECT * FROM " + table;
+        String sql = String.format("SELECT * FROM [%s]",
+                table);
 
-        try(PreparedStatement stmt = connection.prepareStatement(sql)){
+        try(PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery())   {
 
-            var rs = stmt.executeQuery();
-
-            while(rs.next()){
-                entities.add(mapper.map(rs));
+            while(resultSet.next()){
+                entities.add(mapper.map(resultSet));
             }
-
-        }catch(SQLException ex){
+        }catch(Exception ex){
             ex.printStackTrace();
-            //Create custom exception
         }
         return entities;
     }
@@ -50,25 +48,23 @@ public class RepositoryImpl<T extends BaseEntity> implements Repository<T> {
     //GET ONE BY ID
     public Optional<T> getBy(int id){
 
-        String sql = "SELECT * FROM " + table + " WHERE id = ? ";
+        String sql = String.format("SELECT * FROM [%s] WHERE id = ?",
+                                table);
 
-        try(PreparedStatement stmt = connection.prepareStatement(sql)){
+        try(PreparedStatement ps = this.connection.prepareStatement(sql)){
 
-            stmt.setObject(1, id);
-            //it replaces the first ? in SQL with 2nd property, in this case ID
-            //setObject works with any type int, long, string,
-            //UUID (Universal Unique Identifier) - globally unique ID generated without database dependancy
-            try(var rs = stmt.executeQuery()) {
+            ps.setInt(1, id);
 
+            try(ResultSet rs = ps.executeQuery()){
                 if(rs.next()){
                     return Optional.of(mapper.map(rs));
                 }
-
             }
-        }catch (SQLException ex){
+
+        } catch(Exception ex){
             ex.printStackTrace();
-            //Better logging
         }
+
         return Optional.empty();
     }
 
@@ -95,32 +91,50 @@ public class RepositoryImpl<T extends BaseEntity> implements Repository<T> {
     @SuppressWarnings("java:S3011")
     private void createInternal(T entity, Field idField) throws Exception {
         Class<?> clazz = entity.getClass();
-        String tableName = clazz.getSimpleName().toLowerCase();
+        String tableName = clazz.getSimpleName();
         Field[] fields = clazz.getDeclaredFields();
 
         StringJoiner columns = new StringJoiner(", ");
         StringJoiner placeholders = new StringJoiner(", ");
 
+        List<Field> fieldsToInsert = new LinkedList<>();
+
         for(Field field : fields){
             field.setAccessible(true);
-            columns.add(field.getName());
+
+            if(field.getName().equalsIgnoreCase("id")){
+                continue;
+            }
+            fieldsToInsert.add(field);
+            columns.add(getColumnName(field));
             placeholders.add("?");
         }
 
-        String sql = String.format("INSERT INTO %s (%s) VALUES (%s)",
+        String sql = String.format("INSERT INTO [%s] (%s) VALUES (%s)",
                                     tableName, columns, placeholders);
 
-        try (PreparedStatement pStmt = connection.prepareStatement(sql,
-                Statement.RETURN_GENERATED_KEYS)){
-            for(int i = 0; i < fields.length; i++){
-                pStmt.setObject(i+1, fields[i].get(entity)); //setObject should automatically CAST into the needed SQL data type
+        try (PreparedStatement ps = this.connection.prepareStatement(sql,
+             Statement.RETURN_GENERATED_KEYS)){
+            for(int i = 0; i < fieldsToInsert.size(); i++){
+                Field field = fieldsToInsert.get(i);
+                Object value = field.get(entity);
+
+                if(value == null){
+                    ps.setObject(i+1, Types.VARCHAR);
+                }
+                else if(value instanceof Enum<?>) {
+                    ps.setString(i + 1, ((Enum<?>) value).name());
+                }
+                else{
+                    ps.setObject(i + 1, value);
+                }
             }
 
-            pStmt.executeUpdate();
+            ps.executeUpdate();
 
-            try(ResultSet rs = pStmt.getGeneratedKeys()){
+            try(ResultSet rs = ps.getGeneratedKeys()){
                 if(rs.next()){
-                    Object newId = rs.getObject(1);
+                    int newId = rs.getInt(1);
                     idField.set(entity, newId);
                 }
             }
@@ -130,25 +144,39 @@ public class RepositoryImpl<T extends BaseEntity> implements Repository<T> {
     @SuppressWarnings("java:S3011")
     private void updateInternal(T entity, int id) throws SQLException, IllegalAccessException{
         Class<?> clazz = entity.getClass();
-        String tableName = clazz.getSimpleName().toLowerCase();
+        String tableName = clazz.getSimpleName();
         Field[] fields = clazz.getDeclaredFields();
+
+        List<Field> fieldsToInsert = new LinkedList<>();
 
         StringJoiner setClause = new StringJoiner(", ");
         for(Field field : fields){
             field.setAccessible(true);
-            setClause.add(field.getName() + " = ?");
+            if(field.getName().equalsIgnoreCase("id")) continue;
+            fieldsToInsert.add(field);
+            setClause.add(getColumnName(field) +" = ?");
         }
 
-        String sql = String.format("UPDATE %s SET %s WHERE id = ?",
+        String sql = String.format("UPDATE [%s] SET %s WHERE id = ?",
                                     tableName, setClause);
 
-        try(PreparedStatement pStmt = connection.prepareStatement(sql)){
+        try(PreparedStatement ps = this.connection.prepareStatement(sql)){
             int i = 0;
-            for(; i < fields.length; i++){
-                pStmt.setObject(i + 1, fields[i].get(entity));
+            for(; i < fieldsToInsert.size(); i++){
+                Field field = fieldsToInsert.get(i);
+                Object value = field.get(entity);
+
+                if (value == null) {
+                    ps.setNull(i + 1, Types.VARCHAR);
+                } else if (value instanceof Enum<?>) {
+                    ps.setString(i + 1, ((Enum<?>) value).name());
+                } else {
+                    ps.setObject(i + 1, value);
+                }
+
             }
-            pStmt.setObject(i + 1, id);
-            pStmt.executeUpdate();
+            ps.setObject(i + 1, id);
+            ps.executeUpdate();
         }
     }
 
@@ -156,15 +184,16 @@ public class RepositoryImpl<T extends BaseEntity> implements Repository<T> {
     public void deleteById(int id) throws Exception {
 
         String tableName = getBy(id)
-                .map(entity -> entity.getClass().getSimpleName().toLowerCase())
+                .map(entity -> entity.getClass().getSimpleName())
                 .orElseThrow(() -> new Exception("Entity not found"));
 
+        String sql = String.format("DELETE FROM [%s] WHERE id = ?",
+                                    tableName);
 
-            String sql = String.format("DELETE FROM %s WHERE id = ?",
-                                        tableName);
-        try(PreparedStatement pStmt = connection.prepareStatement(sql)){
-            pStmt.setInt(1, id);
-            pStmt.executeUpdate();
+        try(PreparedStatement ps = this.connection.prepareStatement(sql)){
+
+            ps.setInt(1, id);
+            ps.executeUpdate();
 
         }
 
@@ -173,13 +202,19 @@ public class RepositoryImpl<T extends BaseEntity> implements Repository<T> {
     //EXISTS?
     public boolean exists(T entity,int id) throws SQLException{
         //Returns 1 if it finds the entity in database
-        String sql = String.format("SELECT 1 FROM %s WHERE id = ? LIMIT 1",
-                                    entity.getClass().getSimpleName().toLowerCase());
-        try(PreparedStatement pStmt = connection.prepareStatement(sql)){
-            pStmt.setObject(1, id);
-            try(ResultSet rs = pStmt.executeQuery()){
+        String sql = String.format("SELECT TOP 1 1 FROM [%s] WHERE id = ?",
+                                    entity.getClass().getSimpleName());
+        try(PreparedStatement ps = this.connection.prepareStatement(sql)){
+            ps.setObject(1, id);
+            try(ResultSet rs = ps.executeQuery()){
                 return rs.next();
             }
         }
+    }
+
+
+    private String getColumnName(Field field) {
+        Column col = field.getAnnotation(Column.class);
+        return col != null ? col.name() : field.getName();
     }
 }

@@ -2,10 +2,11 @@ package hr.algebra.controller;
 
 
 import hr.algebra.controller.services.AuthService;
+import hr.algebra.controller.services.entities.AuthServiceImpl;
 import hr.algebra.model.exceptions.InvalidCredentialsException;
-import hr.algebra.model.repositories.UnitOfWork;
-import hr.algebra.security.entity.Role;
-import hr.algebra.security.entity.User;
+import hr.algebra.model.entities.Role;
+import hr.algebra.model.entities.User;
+import hr.algebra.model.repositories.entities.UnitOfWorkImpl;
 import hr.algebra.view.App;
 import hr.algebra.view.util.AlertUtil;
 import hr.algebra.view.util.SceneUtil;
@@ -14,15 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.sql.SQLOutput;
-
 public class LoginController {
-
-    private final AuthService service;
-
-    public LoginController(AuthService service) {
-        this.service = service;
-    }
 
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
@@ -32,21 +25,29 @@ public class LoginController {
         String username = usernameField.getText().trim();
         String password = passwordField.getText();
 
+        try(UnitOfWorkImpl uow = new UnitOfWorkImpl()){
+            AuthService service = new AuthServiceImpl(uow);
 
-        try{
             User loggedInUser = service.login(username, password);
 
             if(loggedInUser.getRole() == Role.ADMIN){
-                System.out.println("Loading admin view!");
+                Stage stage = (Stage) usernameField.getScene().getWindow();
+                SceneUtil.loadScene(App.class.getResource("/fxml/admin.fxml"), stage, "Admin View");
             }
             else{
-                System.out.println("Loading user view!");
+                Stage stage = (Stage) usernameField.getScene().getWindow();
+                SceneUtil.loadScene(App.class.getResource("/fxml/user.fxml"), stage, "User View");
             }
 
         } catch (InvalidCredentialsException ex) {
-            throw new RuntimeException(ex.getMessage()); //Label error.setText(ex);
+            AlertUtil.showError("Login failed", "Wrong username or password");
         } catch(Exception ex){
-            throw new Exception("System error!"); //Label error.setText(ex);
+            AlertUtil.showError("System error", "Login error");
         }
+    }
+
+    public void loadRegistration() {
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        SceneUtil.loadScene(App.class.getResource("/fxml/registration.fxml"), stage, "Registration", new RegistrationController());
     }
 }

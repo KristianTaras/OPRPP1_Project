@@ -1,95 +1,135 @@
 package hr.algebra.model.entities;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-import java.time.Year;
-import java.util.List;
+import hr.algebra.model.interfaces.Column;
+import hr.algebra.model.interfaces.Transient;
+
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
-@XmlRootElement(name = "SmartWatch")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class SmartWatch extends BaseEntity {
 
-    //Dummy constructor - need empty constructor to enable jakarta
-    public SmartWatch(){
-        super(0);
-    }
+    private final String name;
+    private final int yearOfMaking;
+    private final Double screenSize;
+    private final int batteryLife;
+    private final String ipRating; //Screen protection
+    @Transient
+    private Set<OperatingSystem> osTypes = new HashSet<>();
+    private final double price;
+    private final String imagePath; //imageUrl
+    @Column(name = "brand_id")
+    private int brandId;
+    @Column(name = "category_id")
+    private int categoryId;
+    @Column(name = "operating_system_id")
+    private int operatingSystemId;
+    @Transient
+    private final Brand brand;
+    @Transient
+    private Set<SmartWatchHealthFunction> smartWatchHealthFunction = new HashSet<>();
+    @Transient
+    private final Category category;
+    @Transient
+    private final OperatingSystem operatingSystem;
+    @Transient
+    private Set<HealthFunction> healthFunctions = new HashSet<>();
 
-    public SmartWatch(int id, String brand, String model, double price) {
+    public SmartWatch(int id, String name, int yearOfMaking, double screenSize, int batteryLife, String ipRating,
+                      double price, String imagePath, Brand brand, Category category,
+                      OperatingSystem operatingSystem){
         super(id);
-    }
-    //Extend the constructor so it takes all the properties
+        this.name = name;
+        this.yearOfMaking = yearOfMaking;
+        this.screenSize = screenSize;
+        this.batteryLife = batteryLife;
+        this.ipRating = ipRating;
+        this.price = price;
+        this.imagePath = imagePath;
+        this.brand = brand;
+        this.category = category;
+        this.operatingSystem = operatingSystem;
 
-    @XmlElement(name = "Name")
-    private String name;
-    @XmlElement(name = "YearOfMaking")
-    private int yearOfMaking;
-    @XmlElement(name = "ScreenSize")
-    private Double screenSize;
-    @XmlElement(name = "BatteryLife")
-    private int batteryLife;
-    @XmlElement(name = "IpRating")
-    private IpRating ipRating; //Screen protection
-    @XmlElement(name = "CompatibleOperatingSystems")
-    private List<CompatibleOSTypes> osTypes;
-    @XmlElement(name = "Price")
-    private double price;
-    @XmlElement(name = "ImagePath")
-    private String imagePath; //imageUrl
-    @XmlElement(name = "Brand")
-    private Brand brand;
-    @XmlElement(name = "HealthFunction")
-    private Set<HealthFunction> healthFunctions;
-    @XmlElement(name = "Category")
-    private Category category;
-    @XmlElement(name = "OperatingSystem")
-    private OperatingSystem operatingSystem;
+        this.brandId = brand != null ? brand.getId() : 0;
+        this.categoryId = category != null ? category.getId() : 0;
+        this.operatingSystemId = operatingSystem != null ? operatingSystem.getId() : 0;
+    }
 
     //get
     //set
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getName() {
+        return name;
+    }
 
-    public int getYearOfMaking() { return yearOfMaking; }
-    public void setYearOfMaking(int yearOfMaking) { this.yearOfMaking = yearOfMaking; }
+    public int getYearOfMaking() {
+        return yearOfMaking;
+    }
 
-    public Double getScreenSize() { return screenSize; }
-    public void setScreenSize(Double screenSize) { this.screenSize = screenSize; }
+    public Double getScreenSize() {
+        return screenSize;
+    }
 
-    public int getBatteryLife() { return batteryLife; }
-    public void setBatteryLife(int batteryLife) { this.batteryLife = batteryLife; }
+    public int getBatteryLife() {
+        return batteryLife;
+    }
 
-    public IpRating getIpRating() { return ipRating; }
-    public void setIpRating(IpRating ipRating) { this.ipRating = ipRating; }
+    public String getIpRating() {
+        return ipRating;
+    }
 
-    public List<CompatibleOSTypes> getOsTypes() { return osTypes; }
-    public void setOsTypes(List<CompatibleOSTypes> osTypes) { this.osTypes = osTypes; }
+    public Set<OperatingSystem> getOsTypes() {
+        return osTypes;
+    }
 
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    public double getPrice() {
+        return price;
+    }
 
-    public String getImagePath() { return imagePath; }
-    public void setImagePath(String imagePath) { this.imagePath = imagePath; }
+    public String getImagePath() {
+        return imagePath;
+    }
 
-    public Brand getBrand() { return brand; }
-    public void setBrand(Brand brand) { this.brand = brand; }
+    public Brand getBrand() {
+        return brand;
+    }
 
-    public Set<HealthFunction> getHealthFunctions() { return healthFunctions; }
-    public void setHealthFunctions(Set<HealthFunction> healthFunctions) { this.healthFunctions = healthFunctions; }
+    public Set<SmartWatchHealthFunction> getSmartWatchHealthFunctions() {
+        return smartWatchHealthFunction;
+    }
 
-    public Category getCategory() { return category; }
-    public void setCategory(Category category) { this.category = category; }
+    public Category getCategory() {
+        return category;
+    }
 
-    public OperatingSystem getOperatingSystem() { return operatingSystem; }
-    public void setOperatingSystem(OperatingSystem operatingSystem) { this.operatingSystem = operatingSystem; }
+    public OperatingSystem getOperatingSystem() {
+        return operatingSystem;
+    }
 
-    //equals, hashcode, toString, Comparable if needed for anything other than id
+    public void setOsTypes(Set<OperatingSystem> osTypes) {
+        this.osTypes = osTypes;
+    }
 
+    public void setSmartWatchHealthFunction(Set<SmartWatchHealthFunction> healthFunctions) {
+        this.smartWatchHealthFunction = healthFunctions;
+    }
 
+    public Set<HealthFunction> getHealthFunctions() {
+        return healthFunctions;
+    }
 
+    public void setHealthFunctions(Set<HealthFunction> healthFunctions) {
+        this.healthFunctions = healthFunctions;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof SmartWatch that && super.equals(that);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

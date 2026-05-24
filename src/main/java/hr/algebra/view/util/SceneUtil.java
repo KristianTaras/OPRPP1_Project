@@ -20,4 +20,15 @@ public final class SceneUtil {
             throw new RuntimeException("Cannot load FXML file: " + fxmlUrl, ex);
         }
     }
+
+    public static void loadScene(URL fxmlUrl, Stage stage, String title, Object controller){
+        try{
+            FXMLLoader loader = new FXMLLoader(fxmlUrl);
+            loader.setController(controller);
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle(title);
+        }catch(IOException ex){
+            throw new RuntimeException("Cannot load FXML file: " + fxmlUrl, ex);
+        }
+    }
 }

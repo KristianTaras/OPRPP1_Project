@@ -1,10 +1,8 @@
 package hr.algebra.view;
 
-import com.jfoenix.controls.JFXDecorator;
+import hr.algebra.controller.LoginController;
+import hr.algebra.view.util.SceneUtil;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
@@ -19,25 +17,14 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         System.out.println("[lifecycle] start() - JavaFX Application Thread");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-        Parent root = loader.load();
+        try{
+            SceneUtil.loadScene(App.class.getResource("/fxml/login.fxml"), stage, "SmartWatch app", new LoginController());
+            stage.setResizable(false);
+            stage.show();
 
-        JFXDecorator decorator = new JFXDecorator(stage, root);
-
-        decorator.setCustomMaximize(false);
-
-        decorator.setTitle("SmartWatch App");
-
-        Scene scene = new Scene(decorator, 1300, 800);
-
-
-        String css = getClass().getResource("/css/MainStyle.css").toExternalForm();
-        scene.getStylesheets().add(css);
-
-        stage.setScene(scene);
-        stage.setTitle("Main Page");
-        stage.setResizable(false);
-        stage.show();
+        } catch (Exception e) {
+            throw new RuntimeException("Loading login stage failed!");
+        }
     }
 
     @Override

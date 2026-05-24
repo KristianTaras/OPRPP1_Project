@@ -10,7 +10,9 @@ public class HealthFunctionMapper implements RowMapper<HealthFunction> {
     @Override
     public HealthFunction map(ResultSet rs) throws SQLException {
         return new HealthFunction(
-                rs.getInt("id")
+                rs.getInt("id"),
+                rs.getString("name"),
+                rs.getString("description")
                 //Add more parameters
         );
     }

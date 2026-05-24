@@ -1,6 +1,6 @@
 package hr.algebra.model.repositories;
 
-import hr.algebra.security.entity.User;
+import hr.algebra.model.entities.User;
 
 import java.util.Optional;
 

@@ -1,24 +1,23 @@
 package hr.algebra.model.entities;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import hr.algebra.model.interfaces.Transient;
 
-@XmlRootElement(name = "HealthFunction")
-@XmlAccessorType(XmlAccessType.FIELD)
+import java.util.Set;
+
 public class HealthFunction extends BaseEntity {
 
-    public HealthFunction() { super(0); }
+    private String name;
+    private String description;
 
-    public HealthFunction(int id) {
+    @Transient
+    private Set<SmartWatchHealthFunction> smartWatchHealthFunctions;
+
+    public HealthFunction(int id, String name, String description){
         super(id);
+        this.name = name;
+        this.description = description;
     }
 
-    @XmlElement(name = "Name")
-    private String name;
-    @XmlElement(name = "Description")
-    private String description;
 
     public String getName() { return name; }
     public void setName(String name) {
@@ -31,4 +30,9 @@ public class HealthFunction extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Set<SmartWatchHealthFunction> getSmartWatchHealthFunctions() {
+        return smartWatchHealthFunctions;
+    }
+
 }

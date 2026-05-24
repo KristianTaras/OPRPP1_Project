@@ -10,8 +10,10 @@ public class BrandMapper implements RowMapper<Brand> {
     @Override
     public Brand map(ResultSet rs) throws SQLException {
         return new Brand(
-                rs.getInt("id")
-                //Add more parameters
+                rs.getInt("id"),
+                rs.getString("name"),
+                rs.getString("country"),
+                rs.getString("description")
         );
     }
 }

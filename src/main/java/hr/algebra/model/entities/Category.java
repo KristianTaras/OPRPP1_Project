@@ -1,23 +1,34 @@
 package hr.algebra.model.entities;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
+import java.util.Set;
 
-@XmlRootElement(name = "Category")
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Category extends BaseEntity{
 
-    public Category() { super(0); }
-
-    public Category(int id){
-        super(id);
-    }
-
-    @XmlElement(name = "Name")
     private String name;
+    private Set<SmartWatch> watches;
+
+    public Category(int id, String name){
+        super(id); this.name = name;
+    }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public Set<SmartWatch> getWatches() {
+        return watches;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Category)) return false;
+        return getId() == ((Category) o).getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }
