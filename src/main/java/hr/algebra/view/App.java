@@ -3,6 +3,7 @@ package hr.algebra.view;
 import hr.algebra.controller.LoginController;
 import hr.algebra.view.util.SceneUtil;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -17,8 +18,11 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         System.out.println("[lifecycle] start() - JavaFX Application Thread");
 
+        Image icon = new Image(App.class.getResourceAsStream("/images/app_icon.png"));
+        stage.getIcons().add(icon);
+
         try{
-            SceneUtil.loadScene(App.class.getResource("/fxml/login.fxml"), stage, "SmartWatch app", new LoginController());
+            SceneUtil.loadScene(App.class.getResource("/fxml/Login.fxml"), stage, "SmartWatch app", new LoginController());
             stage.setResizable(false);
             stage.show();
 

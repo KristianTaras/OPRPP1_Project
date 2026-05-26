@@ -1,6 +1,6 @@
 package hr.algebra.model.repositories.entities;
 
-import hr.algebra.model.entities.SmartWatchOperatingSystem;
+
 import hr.algebra.model.mapper.*;
 import hr.algebra.model.repositories.*;
 import hr.algebra.view.util.DatabaseUtil;
@@ -24,6 +24,10 @@ public class UnitOfWorkImpl implements UnitOfWork, AutoCloseable {
     public UnitOfWorkImpl() throws SQLException{
         connection = DatabaseUtil.getConnection();
         connection.setAutoCommit(false); //Turn off to enable rollback
+    }
+
+    public Connection getConnection(){
+        return connection;
     }
 
     //Lazy loading

@@ -12,6 +12,8 @@ public interface Repository<T extends BaseEntity> {
 
     Optional<T> getBy(int id);
 
+    Optional<T> getByName(String name);
+
     void save(T entity) throws Exception;
 
     void deleteById(int id) throws Exception;

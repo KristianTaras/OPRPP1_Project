@@ -32,11 +32,11 @@ public class LoginController {
 
             if(loggedInUser.getRole() == Role.ADMIN){
                 Stage stage = (Stage) usernameField.getScene().getWindow();
-                SceneUtil.loadScene(App.class.getResource("/fxml/admin.fxml"), stage, "Admin View");
+                SceneUtil.loadScene(App.class.getResource("/fxml/AdminView.fxml"), stage, "Admin View");
             }
             else{
                 Stage stage = (Stage) usernameField.getScene().getWindow();
-                SceneUtil.loadScene(App.class.getResource("/fxml/user.fxml"), stage, "User View");
+                SceneUtil.loadScene(App.class.getResource("/fxml/UserView.fxml"), stage, "User View");
             }
 
         } catch (InvalidCredentialsException ex) {
@@ -48,6 +48,6 @@ public class LoginController {
 
     public void loadRegistration() {
         Stage stage = (Stage) usernameField.getScene().getWindow();
-        SceneUtil.loadScene(App.class.getResource("/fxml/registration.fxml"), stage, "Registration", new RegistrationController());
+        SceneUtil.loadScene(App.class.getResource("/fxml/Registration.fxml"), stage, "Registration", new RegistrationController());
     }
 }

@@ -4,7 +4,6 @@ import hr.algebra.model.entities.SmartWatch;
 import hr.algebra.model.repositories.entities.UnitOfWorkImpl;
 import hr.algebra.view.App;
 import hr.algebra.view.util.SceneUtil;
-import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,10 +21,10 @@ import java.util.ResourceBundle;
 public class UserMainController implements Initializable {
 
     @FXML private StackPane contentPane;
-    @FXML private Label userLabel;
+    @FXML private Label statusLabel;
     @FXML private TextField searchField;
 
-    private SmartWatchTableController tableController;
+    private SmartWatchGridController currentGrid;
     private FilteredList<SmartWatch> filteredWatches;
 
     @Override
@@ -37,8 +36,9 @@ public class UserMainController implements Initializable {
 
     @FXML
     private void handleSmartWatches() {
-        tableController = new SmartWatchTableController();
-        loadView("/fxml/SmartWatchTable.fxml", tableController);
+        SmartWatchGridController grid = new SmartWatchGridController();
+        loadView("/fxml/SmartWatchGrid.fxml", grid);
+        setStatus("Showing: Smart Watches");
     }
 
     @FXML
@@ -50,7 +50,7 @@ public class UserMainController implements Initializable {
 
     @FXML
     private void handleSearch() {
-        if (tableController == null) return;
+        if (currentGrid == null) return;
 
         String query = searchField.getText().trim().toLowerCase();
 
@@ -64,11 +64,29 @@ public class UserMainController implements Initializable {
                             || (w.getCategory() != null && w.getCategory().getName().toLowerCase().contains(query)))
                     .toList();
 
-            tableController.setData(filtered);
+            currentGrid.setData(filtered);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleBrands() {
+        currentGrid = null;
+        setStatus("Showing: Brands");
+    }
+
+    @FXML
+    private void handleCategories() {
+        currentGrid = null;
+        setStatus("Showing: Categories");
+    }
+
+    @FXML
+    private void handleUsers() {
+        currentGrid = null;
+        setStatus("Showing: Users");
     }
 
     // ── Logout ──────────────────────────────────────────────────
@@ -77,7 +95,7 @@ public class UserMainController implements Initializable {
     private void handleLogout() {
         Stage stage = (Stage) contentPane.getScene().getWindow();
         SceneUtil.loadScene(
-                App.class.getResource("/fxml/login.fxml"),
+                App.class.getResource("/fxml/Login.fxml"),
                 stage,
                 "Login",
                 new LoginController()
@@ -95,5 +113,9 @@ public class UserMainController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void setStatus(String message) {
+        if (statusLabel != null) statusLabel.setText(message);
     }
 }

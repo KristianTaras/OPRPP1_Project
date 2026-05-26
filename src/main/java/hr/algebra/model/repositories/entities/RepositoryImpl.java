@@ -69,6 +69,28 @@ public class RepositoryImpl<T extends BaseEntity> implements Repository<T> {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<T> getByName(String name) {
+        String sql = String.format("SELECT * FROM [%s] WHERE name = ?",
+                table);
+
+        try(PreparedStatement ps = this.connection.prepareStatement(sql)){
+
+            ps.setString(1, name);
+
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return Optional.of(mapper.map(rs));
+                }
+            }
+
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
     //CREATE
     //Suppresses SolanQube warning about setting private fields to accessible, suppress casting warning
     @SuppressWarnings({"java:S3011","unchecked"})

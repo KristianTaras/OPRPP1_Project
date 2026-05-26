@@ -37,8 +37,8 @@ public class AdminMainController implements Initializable {
 
     @FXML
     private void handleSmartWatches() {
-        currentTableController = new SmartWatchTableController();
-        loadView("/fxml/SmartWatchTable.fxml", currentTableController);
+        SmartWatchGridController grid = new SmartWatchGridController();
+        loadView("/fxml/SmartWatchGrid.fxml", grid);
         setStatus("Showing: Smart Watches");
     }
 
@@ -129,7 +129,7 @@ public class AdminMainController implements Initializable {
     private void handleLogout() {
         Stage stage = (Stage) contentPane.getScene().getWindow();
         SceneUtil.loadScene(
-                App.class.getResource("/fxml/login.fxml"),
+                App.class.getResource("/fxml/Login.fxml"),
                 stage,
                 "Login",
                 new LoginController()

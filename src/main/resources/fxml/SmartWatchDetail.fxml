@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefWidth="540" spacing="0" style="-fx-background-color: #111; -fx-background-radius: 12; -fx-border-color: #222; -fx-border-width: 2; -fx-border-radius: 12;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+
+    <!-- Header image area -->
+    <StackPane fx:id="headerPane" prefHeight="200" style="-fx-background-color: white; -fx-background-radius: 10 10 0 0;">
+
+        <Label fx:id="watchEmoji" style="-fx-font-size: 80px;" text="⌚" />
+
+        <Label fx:id="categoryBadge" style="-fx-background-color: #e94560; -fx-text-fill: white;                       -fx-font-size: 10px; -fx-font-weight: bold;                       -fx-background-radius: 4; -fx-padding: 3 8 3 8;" text="PREMIUM" StackPane.alignment="TOP_RIGHT">
+            <StackPane.margin><Insets right="15" top="15" /></StackPane.margin>
+        </Label>
+    </StackPane>
+
+    <!-- Scrollable content -->
+    <ScrollPane fitToWidth="true" style="-fx-background: #111; -fx-background-color: #111;" VBox.vgrow="ALWAYS">
+
+        <VBox spacing="0">
+            <padding><Insets bottom="24" left="24" right="24" top="20" /></padding>
+
+            <!-- Name + Price -->
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label fx:id="watchName" style="-fx-text-fill: #f0f0f0; -fx-font-size: 20px; -fx-font-weight: bold;" text="Apple Watch Ultra 2" />
+                    <Label fx:id="watchBrand" style="-fx-text-fill: #888; -fx-font-size: 13px;" text="Apple · 2023" />
+                </VBox>
+                <Label fx:id="watchPrice" style="-fx-text-fill: #e94560; -fx-font-size: 22px; -fx-font-weight: bold;" text="€799.99" />
+            </HBox>
+
+            <!-- Divider -->
+            <Pane prefHeight="1" style="-fx-background-color: #222;">
+                <VBox.margin><Insets bottom="16" top="16" /></VBox.margin>
+            </Pane>
+
+            <!-- Specs -->
+            <Label style="-fx-text-fill: #555; -fx-font-size: 10px;                           -fx-font-weight: bold; -fx-padding: 0 0 10 0;" text="SPECIFICATIONS" />
+
+            <GridPane hgap="12" vgap="10">
+                <Label style="-fx-text-fill: #666; -fx-font-size: 12px;" text="Screen Size" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="watchScreen" style="-fx-text-fill: #ccc; -fx-font-size: 12px; -fx-font-weight: bold;" text="1.92 in" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label style="-fx-text-fill: #666; -fx-font-size: 12px;" text="Battery Life" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <Label fx:id="watchBattery" style="-fx-text-fill: #ccc; -fx-font-size: 12px; -fx-font-weight: bold;" text="60h" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+                <Label style="-fx-text-fill: #666; -fx-font-size: 12px;" text="IP Rating" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="watchIp" style="-fx-text-fill: #ccc; -fx-font-size: 12px; -fx-font-weight: bold;" text="IP6X" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label style="-fx-text-fill: #666; -fx-font-size: 12px;" text="Operating System" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Label fx:id="watchOS" style="-fx-text-fill: #ccc; -fx-font-size: 12px; -fx-font-weight: bold;" text="watchOS 10.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                <Label style="-fx-text-fill: #666; -fx-font-size: 12px;" text="Compatible With" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label fx:id="watchOsTypes" style="-fx-text-fill: #ccc; -fx-font-size: 12px; -fx-font-weight: bold;" text="iOS" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="110" />
+                    <ColumnConstraints prefWidth="110" />
+                    <ColumnConstraints prefWidth="120" />
+                    <ColumnConstraints prefWidth="110" />
+                </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+
+            <!-- Divider -->
+            <Pane prefHeight="1" style="-fx-background-color: #222;">
+                <VBox.margin><Insets bottom="16" top="16" /></VBox.margin>
+            </Pane>
+
+            <!-- Brand — horizontalno -->
+            <Label style="-fx-text-fill: #555; -fx-font-size: 10px;                           -fx-font-weight: bold; -fx-padding: 0 0 10 0;" text="BRAND" />
+
+            <HBox alignment="CENTER_LEFT" spacing="16" style="-fx-background-color: #1a1a1a; -fx-background-radius: 8; -fx-padding: 14;">
+
+                <!-- Brand logo placeholder -->
+                <StackPane prefHeight="48" prefWidth="48" style="-fx-background-color: #2a2a2a; -fx-background-radius: 8;">
+                    <Label style="-fx-font-size: 22px;" text="🏷" />
+                </StackPane>
+
+                <!-- Brand text info -->
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Label fx:id="brandName" style="-fx-text-fill: #f0f0f0; -fx-font-size: 15px; -fx-font-weight: bold;" text="Apple" />
+                        <Label fx:id="brandCountry" style="-fx-background-color: #2a2a2a; -fx-text-fill: #888;                                       -fx-font-size: 11px; -fx-background-radius: 4;                                       -fx-padding: 2 8 2 8;" text="USA" />
+                    </HBox>
+                    <Label fx:id="brandDescription" style="-fx-text-fill: #666; -fx-font-size: 12px;" text="Apple Inc. is a leading technology company." wrapText="true" />
+                </VBox>
+            </HBox>
+
+            <!-- Divider -->
+            <Pane prefHeight="1" style="-fx-background-color: #222;">
+                <VBox.margin><Insets bottom="16" top="16" /></VBox.margin>
+            </Pane>
+
+            <!-- Health Functions -->
+            <Label style="-fx-text-fill: #555; -fx-font-size: 10px;                           -fx-font-weight: bold; -fx-padding: 0 0 6 0;" text="HEALTH FUNCTIONS" />
+
+            <Label style="-fx-text-fill: #444; -fx-font-size: 11px; -fx-padding: 0 0 10 0;" text="Click a function to see its description" />
+
+            <FlowPane fx:id="healthPane" hgap="8" vgap="8" />
+
+            <!-- Health function description box — prikazuje se na klik -->
+            <VBox fx:id="descriptionBox" managed="false" spacing="4" style="-fx-background-color: #1a2a1a; -fx-background-radius: 8;                          -fx-border-color: #2a4a2a; -fx-border-radius: 8;                          -fx-padding: 12;" visible="false">
+                <VBox.margin><Insets top="10" /></VBox.margin>
+                <Label fx:id="descriptionTitle" style="-fx-text-fill: #6fcf6f; -fx-font-size: 13px; -fx-font-weight: bold;" text="Heart Rate Monitor" />
+                <Label fx:id="descriptionText" style="-fx-text-fill: #aaa; -fx-font-size: 12px;" text="Continuously monitors heart rate throughout the day." wrapText="true" />
+            </VBox>
+
+            <!-- Close button -->
+            <Button maxWidth="Infinity" onAction="#handleClose" style="-fx-background-color: #1e1e1e; -fx-text-fill: #aaa;                            -fx-background-radius: 8; -fx-font-size: 13px;                            -fx-cursor: hand; -fx-padding: 10 0 10 0;" text="Close">
+                <VBox.margin><Insets top="20" /></VBox.margin>
+            </Button>
+
+        </VBox>
+    </ScrollPane>
+</VBox>

@@ -17,7 +17,14 @@ public class SmartWatchDTO {
     public double price;
     public String imagePath;
     public String brand;
+    public String brandCountry;
+    public String brandDescription;
     public List<String> healthFunctions;
+    public List<String> healthFunctionDescriptions;
     public String category;
     public String operatingSystem;
+    public String osVersion;
+    public String osDeveloper;
 }
+
+
