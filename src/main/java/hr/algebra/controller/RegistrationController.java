@@ -1,18 +1,18 @@
 package hr.algebra.controller;
 
-import hr.algebra.controller.services.AuthService;
-import hr.algebra.controller.services.entities.AuthServiceImpl;
+import hr.algebra.controller.services.interfaces.AuthService;
+import hr.algebra.controller.services.implementations.AuthServiceImpl;
 import hr.algebra.model.exceptions.UsernameAlreadyExistsException;
-import hr.algebra.model.repositories.entities.UnitOfWorkImpl;
-import hr.algebra.view.util.AlertUtil;
+import hr.algebra.model.repositories.implementations.UnitOfWorkImpl;
+import hr.algebra.util.AlertUtil;
+import hr.algebra.util.SceneUtil;
+import hr.algebra.view.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
-import java.sql.SQLException;
+import javafx.stage.Stage;
 
 public class RegistrationController {
-
 
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
@@ -23,7 +23,7 @@ public class RegistrationController {
 
 
     @FXML
-    private void handleRegistration() throws Exception{
+    private void handleRegistration(){
 
         String firstName = firstNameField.getText().trim();
         String lastName = lastNameField.getText().trim();
@@ -38,7 +38,13 @@ public class RegistrationController {
 
             AlertUtil.showInfo("Success", "Registration successful!");
 
-            clearFields();
+            try{
+                Stage stage = (Stage) usernameField.getScene().getWindow();
+                SceneUtil.loadScene(App.class.getResource("/fxml/Login.fxml"), stage, "Login", new LoginController());
+            } catch(Exception ex){
+                throw new RuntimeException();
+            }
+
 
         } catch(UsernameAlreadyExistsException ex){
             AlertUtil.showError("System error", "Username already exists");

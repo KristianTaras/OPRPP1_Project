@@ -102,8 +102,8 @@ public class SmartWatchDetailController implements Initializable {
                     + " " + watch.getOperatingSystem().getVersion());
         }
 
-        if (watch.getOsTypes() != null && !watch.getOsTypes().isEmpty()) {
-            String types = watch.getOsTypes().stream()
+        if (watch.getSmartWatchOperatingSystem() != null && !watch.getSmartWatchOperatingSystem().isEmpty()) {
+            String types = watch.getSmartWatchOperatingSystem().stream()
                     .map(os -> os.getName())
                     .collect(Collectors.joining(", "));
             watchOsTypes.setText(types);
@@ -143,7 +143,7 @@ public class SmartWatchDetailController implements Initializable {
                     return;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                e.printStackTrace(); //Custom
             }
         }
         watchEmoji.setVisible(true);

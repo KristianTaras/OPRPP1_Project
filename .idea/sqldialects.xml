@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/entities/HealthFunctionRepositoryImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/entities/OperatingSystemRepositoryImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/entities/RepositoryImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/entities/SmartWatchHealthFunctionRepositoryImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/entities/SmartWatchRepositoryImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/entities/UserRepositoryImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/view/util/DatabaseUtil.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/json/SmartWatchSeeder.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/implementations/HealthFunctionRepositoryImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/implementations/OperatingSystemRepositoryImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/implementations/RepositoryImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/implementations/SmartWatchHealthFunctionRepositoryImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/implementations/SmartWatchRepositoryImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/model/repositories/implementations/UserRepositoryImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/hr/algebra/util/DatabaseUtil.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/sql/DBData.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/sql/DBDelete.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/sql/DBScheme.sql" dialect="TSQL" />

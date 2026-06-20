@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      spacing="0"
+      style="-fx-background-color: #0d0d0d;">
+
+    <Label text="COMPARE HEALTH FUNCTIONS"
+           style="-fx-text-fill: #e94560; -fx-font-size: 14px;
+                  -fx-font-weight: bold; -fx-padding: 20 20 10 20;"/>
+
+    <Label text="Drag health functions into the comparison slots to compare them"
+           style="-fx-text-fill: #555; -fx-font-size: 11px; -fx-padding: 0 20 16 20;"/>
+
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+        <padding><Insets left="20" right="20" bottom="20"/></padding>
+
+        <!--Slot A-->
+        <VBox spacing="12" HBox.hgrow="ALWAYS">
+            <Label text="SLOT A"
+                   style="-fx-text-fill: #5b9bd5; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+
+            <StackPane fx:id="dropZoneA" prefHeight="120"
+                       style="-fx-background-color: #1a1a2e;
+                              -fx-border-color: #5b9bd5; -fx-border-width: 2;
+                              -fx-border-style: dashed; -fx-border-radius: 10;
+                              -fx-background-radius: 10;">
+                <Label fx:id="dropLabelA" text="Drop here"
+                       style="-fx-text-fill: #444; -fx-font-size: 13px;"/>
+            </StackPane>
+
+            <!-- Details A -->
+            <VBox fx:id="detailBoxA" spacing="8" visible="false" managed="false"
+                  style="-fx-background-color: #1a1a2e; -fx-background-radius: 10;
+                         -fx-border-color: #5b9bd5; -fx-border-radius: 10;
+                         -fx-padding: 16;">
+                <Label fx:id="nameA"
+                       text=""
+                       style="-fx-text-fill: #5b9bd5; -fx-font-size: 16px;
+                              -fx-font-weight: bold;"/>
+                <Label fx:id="descA"
+                       text=""
+                       wrapText="true"
+                       style="-fx-text-fill: #aaa; -fx-font-size: 12px;"/>
+                <Button text="✕ Clear" onAction="#handleClearA"
+                        style="-fx-background-color: #2d2d44; -fx-text-fill: #888;
+                               -fx-background-radius: 6; -fx-cursor: hand;
+                               -fx-padding: 4 12 4 12; -fx-font-size: 11px;"/>
+            </VBox>
+        </VBox>
+
+        <!--VS label-->
+        <VBox alignment="CENTER" prefWidth="40">
+            <Label text="VS"
+                   style="-fx-text-fill: #e94560; -fx-font-size: 18px;
+                          -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!--Slot B-->
+        <VBox spacing="12" HBox.hgrow="ALWAYS">
+            <Label text="SLOT B"
+                   style="-fx-text-fill: #6fcf6f; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+
+            <StackPane fx:id="dropZoneB" prefHeight="120"
+                       style="-fx-background-color: #1a2a1a;
+                              -fx-border-color: #6fcf6f; -fx-border-width: 2;
+                              -fx-border-style: dashed; -fx-border-radius: 10;
+                              -fx-background-radius: 10;">
+                <Label fx:id="dropLabelB" text="Drop here"
+                       style="-fx-text-fill: #444; -fx-font-size: 13px;"/>
+            </StackPane>
+
+            <!-- Details B -->
+            <VBox fx:id="detailBoxB" spacing="8" visible="false" managed="false"
+                  style="-fx-background-color: #1a2a1a; -fx-background-radius: 10;
+                         -fx-border-color: #6fcf6f; -fx-border-radius: 10;
+                         -fx-padding: 16;">
+                <Label fx:id="nameB"
+                       text=""
+                       style="-fx-text-fill: #6fcf6f; -fx-font-size: 16px;
+                              -fx-font-weight: bold;"/>
+                <Label fx:id="descB"
+                       text=""
+                       wrapText="true"
+                       style="-fx-text-fill: #aaa; -fx-font-size: 12px;"/>
+                <Button text="✕ Clear" onAction="#handleClearB"
+                        style="-fx-background-color: #1a2a1a; -fx-text-fill: #888;
+                               -fx-background-radius: 6; -fx-cursor: hand;
+                               -fx-padding: 4 12 4 12; -fx-font-size: 11px;"/>
+            </VBox>
+        </VBox>
+    </HBox>
+
+    <!-- Divider -->
+    <Pane prefHeight="1" style="-fx-background-color: #222;">
+        <VBox.margin><Insets left="20" right="20"/></VBox.margin>
+    </Pane>
+
+    <!--Available health functions-->
+    <Label text="AVAILABLE HEALTH FUNCTIONS"
+           style="-fx-text-fill: #555; -fx-font-size: 11px;
+                  -fx-font-weight: bold; -fx-padding: 16 20 8 20;"/>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                style="-fx-background: #0d0d0d; -fx-background-color: #0d0d0d;">
+        <FlowPane fx:id="healthPane" hgap="10" vgap="10"
+                  style="-fx-background-color: #0d0d0d;">
+            <padding><Insets top="8" right="20" bottom="20" left="20"/></padding>
+        </FlowPane>
+    </ScrollPane>
+
+</VBox>

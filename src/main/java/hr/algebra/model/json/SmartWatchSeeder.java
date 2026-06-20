@@ -1,7 +1,7 @@
 package hr.algebra.model.json;
 
 import hr.algebra.model.entities.*;
-import hr.algebra.model.repositories.entities.UnitOfWorkImpl;
+import hr.algebra.model.repositories.implementations.UnitOfWorkImpl;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,16 +48,12 @@ public class SmartWatchSeeder {
 
     private static void seedWatch(UnitOfWorkImpl uow, SmartWatchDTO dto) throws Exception {
 
-        // Brand
         Brand brand = saveBrandIfNonExistent(uow,dto);
 
-        // Category
         Category category = saveCategoryIfNonExistent(uow,dto);
 
-        // OperatingSystem
         OperatingSystem operatingSystem = saveOSIfNonExistent(uow, dto);
 
-        // SmartWatch
         SmartWatch watch = new SmartWatch(
                 0,
                 dto.name,
@@ -73,11 +69,8 @@ public class SmartWatchSeeder {
         );
         uow.getSmartWatchRepository().save(watch);
 
-
-        // HealthFunctions - SmartWatchHealthFunction
         saveHealthFunctionIfNonExistent(uow,watch,dto);
 
-        // CompatibleOsTypes - SmartWatchOperatingSystem
         if (dto.osTypes != null) {
             for (String osTypeName : dto.osTypes) {
                 OperatingSystem compatibleOs = uow.getOperatingSystemRepository().getByName(osTypeName)

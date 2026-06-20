@@ -21,15 +21,6 @@ public class SmartWatchHealthFunction extends BaseEntity {
         this.healthFunctionId = healthFunctionId;
     }
 
-    public int getSmartWatchId() { return smartWatchId; }
-
-    public void setSmartWatchId(int smartWatchId) { this.smartWatchId = smartWatchId; }
-
-    public int getHealthFunctionId() { return healthFunctionId; }
-
-    public void setHealthFunctionId(int healthFunctionId) { this.healthFunctionId = healthFunctionId; }
-
-
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof SmartWatchHealthFunction that)) return false;

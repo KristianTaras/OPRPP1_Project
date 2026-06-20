@@ -17,7 +17,7 @@ public class SmartWatch extends BaseEntity {
     @Column(name = "ip_rating")
     private final String ipRating; //Screen protection
     @Transient
-    private Set<OperatingSystem> osTypes = new HashSet<>();
+    private Set<OperatingSystem> smartWatchOperatingSystem = new HashSet<>();
     private final double price;
     @Column(name = "image_path")
     private final String imagePath; //imageUrl
@@ -58,8 +58,6 @@ public class SmartWatch extends BaseEntity {
         this.operatingSystemId = operatingSystem != null ? operatingSystem.getId() : 0;
     }
 
-    //get
-    //set
 
     public String getName() {
         return name;
@@ -81,8 +79,8 @@ public class SmartWatch extends BaseEntity {
         return ipRating;
     }
 
-    public Set<OperatingSystem> getOsTypes() {
-        return osTypes;
+    public Set<OperatingSystem> getSmartWatchOperatingSystem() {
+        return smartWatchOperatingSystem;
     }
 
     public double getPrice() {
@@ -109,8 +107,8 @@ public class SmartWatch extends BaseEntity {
         return operatingSystem;
     }
 
-    public void setOsTypes(Set<OperatingSystem> osTypes) {
-        this.osTypes = osTypes;
+    public void setSmartWatchOperatingSystem(Set<OperatingSystem> smartWatchOperatingSystem) {
+        this.smartWatchOperatingSystem = smartWatchOperatingSystem;
     }
 
     public void setSmartWatchHealthFunction(Set<SmartWatchHealthFunction> healthFunctions) {

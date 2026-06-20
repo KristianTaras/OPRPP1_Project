@@ -80,7 +80,7 @@
                 <VBox.margin><Insets bottom="16" top="16" /></VBox.margin>
             </Pane>
 
-            <!-- Brand — horizontalno -->
+            <!-- Brand — horizontally -->
             <Label style="-fx-text-fill: #555; -fx-font-size: 10px;                           -fx-font-weight: bold; -fx-padding: 0 0 10 0;" text="BRAND" />
 
             <HBox alignment="CENTER_LEFT" spacing="16" style="-fx-background-color: #1a1a1a; -fx-background-radius: 8; -fx-padding: 14;">
@@ -112,7 +112,7 @@
 
             <FlowPane fx:id="healthPane" hgap="8" vgap="8" />
 
-            <!-- Health function description box — prikazuje se na klik -->
+            <!-- Health function description box — show on click -->
             <VBox fx:id="descriptionBox" managed="false" spacing="4" style="-fx-background-color: #1a2a1a; -fx-background-radius: 8;                          -fx-border-color: #2a4a2a; -fx-border-radius: 8;                          -fx-padding: 12;" visible="false">
                 <VBox.margin><Insets top="10" /></VBox.margin>
                 <Label fx:id="descriptionTitle" style="-fx-text-fill: #6fcf6f; -fx-font-size: 13px; -fx-font-weight: bold;" text="Heart Rate Monitor" />
@@ -125,5 +125,6 @@
             </Button>
 
         </VBox>
+
     </ScrollPane>
 </VBox>

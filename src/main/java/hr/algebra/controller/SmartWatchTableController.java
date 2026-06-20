@@ -1,9 +1,9 @@
 package hr.algebra.controller;
 
-import hr.algebra.controller.services.SmartWatchService;
+
 import hr.algebra.model.entities.HealthFunction;
 import hr.algebra.model.entities.SmartWatch;
-import hr.algebra.model.repositories.entities.UnitOfWorkImpl;
+import hr.algebra.model.repositories.implementations.UnitOfWorkImpl;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

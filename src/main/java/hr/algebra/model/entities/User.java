@@ -2,7 +2,6 @@ package hr.algebra.model.entities;
 
 import hr.algebra.model.interfaces.Column;
 
-
 public class User extends BaseEntity {
 
     @Column(name = "first_name")
@@ -43,4 +42,12 @@ public class User extends BaseEntity {
     public String getUsername() { return username; }
     public String getPasswordHash() { return passwordHash; }
     public Role getRole() { return role; }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof User that && super.equals(that);
+    }
+
+    @Override
+    public int hashCode() { return super.hashCode(); }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      spacing="0" style="-fx-background-color: #0f0f1a;">
+
+    <TableView fx:id="brandTable" VBox.vgrow="ALWAYS"
+               style="-fx-background-color: #0f0f1a; -fx-table-cell-border-color: #2d2d44;
+                      -fx-control-inner-background: #0f0f1a;
+                      -fx-control-inner-background-alt: #161628;">
+        <columns>
+            <TableColumn fx:id="colId"          text="ID"          prefWidth="60"/>
+            <TableColumn fx:id="colName"        text="Name"        prefWidth="200"/>
+            <TableColumn fx:id="colCountry"     text="Country"     prefWidth="150"/>
+            <TableColumn fx:id="colDescription" text="Description" prefWidth="400"/>
+        </columns>
+        <placeholder>
+            <Label text="No brands found." style="-fx-text-fill: #555;"/>
+        </placeholder>
+    </TableView>
+</VBox>

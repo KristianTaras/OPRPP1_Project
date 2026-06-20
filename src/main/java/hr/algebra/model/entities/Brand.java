@@ -1,16 +1,12 @@
 package hr.algebra.model.entities;
 
-import hr.algebra.model.interfaces.Transient;
 import java.util.Objects;
-import java.util.Set;
 
 public class Brand extends BaseEntity {
 
     private String name; //Apple, Samsung
     private String country;
     private String description;
-    @Transient
-    private Set<SmartWatch> smartWatches;
 
     public Brand(int id, String name, String country, String description ){
         super(id);
@@ -38,11 +34,6 @@ public class Brand extends BaseEntity {
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-
-
-    public Set<SmartWatch> getSmartWatches() {
-        return smartWatches;
     }
 
     @Override

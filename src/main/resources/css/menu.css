@@ -1,0 +1,49 @@
+/* MenuBar background */
+.menu-bar {
+    -fx-background-color: #1a1a2e;
+    -fx-padding: 4 0 4 0;
+}
+
+/* Sva slova u MenuBar */
+.menu-bar .menu .label {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+}
+
+/* Hover na Menu */
+.menu-bar .menu:hover {
+    -fx-background-color: #2d2d44;
+}
+
+.menu-bar .menu:showing {
+    -fx-background-color: #2d2d44;
+}
+
+/* Dropdown background */
+.context-menu {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1;
+}
+
+/* Views dropdown items - important overrides other settings */
+.views-item .label {
+    -fx-text-fill: #111 !important;
+    -fx-font-size: 12px;
+}
+
+.views-item:hover .label,
+.views-item:focused .label {
+    -fx-text-fill: white !important;
+}
+
+.views-item:hover,
+.views-item:focused {
+    -fx-background-color: #2d2d44;
+}
+
+/* Logout MenuItem */
+.logout-item .label {
+    -fx-text-fill: #e94560;
+    -fx-font-weight: bold;
+}

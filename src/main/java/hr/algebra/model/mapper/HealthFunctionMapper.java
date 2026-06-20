@@ -13,7 +13,7 @@ public class HealthFunctionMapper implements RowMapper<HealthFunction> {
                 rs.getInt("id"),
                 rs.getString("name"),
                 rs.getString("description")
-                //Add more parameters
+
         );
     }
 }

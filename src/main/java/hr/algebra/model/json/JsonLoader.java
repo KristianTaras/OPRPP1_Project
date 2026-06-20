@@ -13,6 +13,8 @@ public class JsonLoader {
     private static final String JSON_BIN_URL = "https://api.npoint.io/04288e9fd11512aa80d4"; //Insert JsonBin.io url
     private static final ObjectMapper mapper = new ObjectMapper();
 
+    private JsonLoader(){}
+
     public static List<SmartWatchDTO> loadSmartWatches() throws Exception{
         SmartWatchDTO[] array = mapper.readValue(new URL(JSON_BIN_URL), SmartWatchDTO[].class);
         return Arrays.asList(array);

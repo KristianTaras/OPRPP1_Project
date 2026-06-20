@@ -1,10 +1,13 @@
 package hr.algebra.view;
 
 import hr.algebra.controller.LoginController;
-import hr.algebra.view.util.SceneUtil;
+import hr.algebra.model.exceptions.ApplicationException;
+import hr.algebra.util.SceneUtil;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 
 public class App extends Application {
@@ -15,10 +18,10 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage){
         System.out.println("[lifecycle] start() - JavaFX Application Thread");
 
-        Image icon = new Image(App.class.getResourceAsStream("/images/app_icon.png"));
+        Image icon = new Image(Objects.requireNonNull(App.class.getResourceAsStream("/images/app_icon.png")));
         stage.getIcons().add(icon);
 
         try{
@@ -27,7 +30,7 @@ public class App extends Application {
             stage.show();
 
         } catch (Exception e) {
-            throw new RuntimeException("Loading login stage failed!");
+            throw new ApplicationException("Loading login stage failed!");
         }
     }
 

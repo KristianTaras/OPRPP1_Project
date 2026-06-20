@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      prefWidth="420" spacing="0"
+      style="-fx-background-color: #111;">
+
+    <!-- Header -->
+    <Label fx:id="titleLabel" text="ADD ENTITY"
+           style="-fx-text-fill: #e94560; -fx-font-size: 14px;
+                  -fx-font-weight: bold; -fx-padding: 20 20 16 20;
+                  -fx-background-color: #1a1a1a; -fx-max-width: Infinity;"/>
+
+    <!-- Dynamic fields -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                style="-fx-background: #111; -fx-background-color: #111;">
+        <VBox fx:id="fieldsContainer" spacing="12">
+            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+        </VBox>
+    </ScrollPane>
+
+    <!-- Error label -->
+    <Label fx:id="errorLabel" text="" wrapText="true"
+           visible="false" managed="false"
+           style="-fx-text-fill: #e94560; -fx-font-size: 11px;
+                  -fx-padding: 0 24 8 24;"/>
+
+    <!-- Buttons -->
+    <HBox spacing="10" style="-fx-padding: 12 24 20 24;">
+        <Button fx:id="saveButton" text="Save" onAction="#handleSave"
+                HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white;
+                       -fx-font-weight: bold; -fx-background-radius: 6;
+                       -fx-cursor: hand; -fx-padding: 10 0 10 0;"/>
+        <Button text="Cancel" onAction="#handleCancel"
+                HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                style="-fx-background-color: #333; -fx-text-fill: #aaa;
+                       -fx-background-radius: 6; -fx-cursor: hand;
+                       -fx-padding: 10 0 10 0;"/>
+    </HBox>
+
+</VBox>

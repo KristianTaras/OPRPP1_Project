@@ -1,15 +1,15 @@
 package hr.algebra.controller;
 
 
-import hr.algebra.controller.services.AuthService;
-import hr.algebra.controller.services.entities.AuthServiceImpl;
+import hr.algebra.controller.services.interfaces.AuthService;
+import hr.algebra.controller.services.implementations.AuthServiceImpl;
 import hr.algebra.model.exceptions.InvalidCredentialsException;
 import hr.algebra.model.entities.Role;
 import hr.algebra.model.entities.User;
-import hr.algebra.model.repositories.entities.UnitOfWorkImpl;
+import hr.algebra.model.repositories.implementations.UnitOfWorkImpl;
 import hr.algebra.view.App;
-import hr.algebra.view.util.AlertUtil;
-import hr.algebra.view.util.SceneUtil;
+import hr.algebra.util.AlertUtil;
+import hr.algebra.util.SceneUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -41,7 +41,7 @@ public class LoginController {
 
         } catch (InvalidCredentialsException ex) {
             AlertUtil.showError("Login failed", "Wrong username or password");
-        } catch(Exception ex){
+        } catch(Exception ex){ //Custom ?
             AlertUtil.showError("System error", "Login error");
         }
     }

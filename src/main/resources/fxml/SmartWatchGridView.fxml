@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      spacing="0"
+      style="-fx-background-color: #0d0d0d;">
+
+    <!-- Toolbar: search + filter -->
+    <HBox spacing="12" alignment="CENTER_LEFT"
+          style="-fx-background-color: #161616; -fx-border-color: #2a2a2a; -fx-border-width: 0 0 1 0;">
+        <padding><Insets top="12" right="20" bottom="12" left="20"/></padding>
+
+        <TextField fx:id="searchField"
+                   promptText="Search watches..."
+                   prefWidth="260"
+                   style="-fx-background-color: #222; -fx-text-fill: #eee;
+                          -fx-prompt-text-fill: #555; -fx-background-radius: 6;
+                          -fx-border-color: #333; -fx-border-radius: 6;
+                          -fx-padding: 7 12 7 12; -fx-font-size: 13px;"/>
+
+        <ComboBox fx:id="categoryFilter"
+                  promptText="All Categories"
+                  prefWidth="160"
+                  style="-fx-background-color: #222; -fx-text-fill: #eee;
+                         -fx-border-color: #333; -fx-border-radius: 6;
+                         -fx-background-radius: 6; -fx-font-size: 13px;"/>
+
+        <ComboBox fx:id="brandFilter"
+                  promptText="All Brands"
+                  prefWidth="150"
+                  style="-fx-background-color: #222; -fx-text-fill: #eee;
+                         -fx-border-color: #333; -fx-border-radius: 6;
+                         -fx-background-radius: 6; -fx-font-size: 13px;"/>
+
+        <Button text="Search"
+                onAction="#smartWatchSearchField"
+                style="-fx-background-color: #e94560; -fx-text-fill: white;
+                       -fx-font-weight: bold; -fx-background-radius: 6;
+                       -fx-padding: 7 18 7 18; -fx-font-size: 13px; -fx-cursor: hand;"/>
+
+        <Button text="Clear"
+                onAction="#setSearchFieldClear"
+                style="-fx-background-color: #333; -fx-text-fill: #aaa;
+                       -fx-background-radius: 6; -fx-padding: 7 14 7 14;
+                       -fx-font-size: 13px; -fx-cursor: hand;"/>
+
+        <HBox HBox.hgrow="ALWAYS"/>
+
+        <Label fx:id="countLabel"
+               text="22 watches"
+               style="-fx-text-fill: #555; -fx-font-size: 12px;"/>
+    </HBox>
+
+    <!-- Scrollable card grid -->
+    <ScrollPane fx:id="scrollPane"
+                VBox.vgrow="ALWAYS"
+                fitToWidth="true"
+                style="-fx-background: #0d0d0d; -fx-background-color: #0d0d0d;
+                       -fx-border-color: transparent;">
+
+        <FlowPane fx:id="cardPane"
+                  hgap="16" vgap="16"
+                  style="-fx-background-color: #0d0d0d;">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+        </FlowPane>
+
+    </ScrollPane>
+
+</VBox>
